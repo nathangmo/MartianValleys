@@ -1,0 +1,28 @@
+# Terrain pipeline configuration
+# -------------------------------------------------------
+# All distances in metres. Pixel coordinates are [col, row] (x, y).
+
+# Path to the raw HiRISE DTM file.
+# Not tracked in git — place under data/raw/ locally.
+dtm_path: data/raw/new/DTEEC_060706_2195_060416_2195_A01.IMG
+
+# Top-left pixel coordinate of the crop window in the full DTM raster.
+# Format: [col, row]  (i.e. [x, y] in rasterio Window convention)
+patch_origin_px: [1526, 5266]
+
+# Edge length of the square crop in pixels at native DTM resolution.
+# At 1 m/px this equals the real-world extent in metres.
+# 100 px → 100 x 100 m patch.
+patch_size_px: 100
+
+# Ground-truth DEM output resolution (metres per pixel).
+# 0.20 m/px → 500 x 500 pixel output for a 100 m patch.
+gt_dem_resolution_m: 0.20
+
+# Amplitude of the procedural displacement added on top of the HiRISE base
+# in Blender (metres). Should match the Blender Displace modifier strength.
+displacement_amplitude_m: 0.5
+
+# Nodata sentinel value from the raw DTM.
+# Set to null to read from the file's own metadata (recommended).
+nodata_value: null

@@ -1,0 +1,57 @@
+# Sample export and Gazebo interoperability configuration
+# -------------------------------------------------------
+
+# Root directory for generated samples (relative to repo root).
+output_dir: outputs/samples
+
+# Sample directory naming: sample_XXXXX (zero-padded to sample_index_width digits).
+sample_prefix: sample
+sample_index_width: 5
+
+# ---------------------------------------------------------------------------
+# Mesh export — two LODs
+# ---------------------------------------------------------------------------
+mesh:
+  # High-resolution LOD — used for GT DEM rasterization.
+  # Target: vertex spacing <= gt_dem.resolution_m on a 100 x 100 m patch.
+  # 2^9 = 512 quads/side → ~0.20 m vertex spacing (matches 20 cm/px target).
+  hires:
+    subdivisions: 9
+    format: obj          # obj | ply | stl
+    filename: terrain_hires.obj
+
+  # Lower-resolution LOD — for Gazebo simulation.
+  # 2^6 = 64 quads/side → ~1.6 m vertex spacing (reasonable for physics sim).
+  lowres:
+    subdivisions: 6
+    format: obj
+    filename: terrain_lowres.obj
+
+# ---------------------------------------------------------------------------
+# Ground-truth DEM
+# ---------------------------------------------------------------------------
+gt_dem:
+  # Must be <= mesh.hires vertex spacing to avoid aliasing.
+  resolution_m: 0.20
+  format: tiff           # tiff | npy
+  filename: gt_dem.tif
+
+  # How to handle rocks / surface objects during rasterization.
+  # bare_terrain : project onto the terrain mesh only (ignore rock geometry)
+  # full_surface : include rock geometry in the height map
+  # OPEN DECISION — not yet resolved.
+  rock_policy: bare_terrain
+
+# ---------------------------------------------------------------------------
+# Gazebo / ROS interoperability
+# ---------------------------------------------------------------------------
+gazebo:
+  # Target coordinate frame for the exported world.
+  # ENU = East-North-Up (standard ROS REP-103 convention).
+  coordinate_frame: ENU
+  world_filename: mars_patch.world
+
+# ---------------------------------------------------------------------------
+# Metadata sidecar (written alongside every sample)
+# ---------------------------------------------------------------------------
+metadata_filename: metadata.json

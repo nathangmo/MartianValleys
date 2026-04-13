@@ -1,0 +1,47 @@
+# Data — large binary files, not tracked in git
+data/raw/
+data/processed/
+
+# Generated outputs
+outputs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.venv/
+venv/
+env/
+dist/
+build/
+*.egg
+.pytest_cache/
+.mypy_cache/
+
+# Blender auto-saves
+*.blend1
+*.blend2
+
+# Raster / mesh artefacts (generated files, not source)
+*.tif
+*.tiff
+*.npy
+*.obj
+*.ply
+*.stl
+*.exr
+
+# Preview images at root level (exploration artefacts)
+dtm_pick*.png
+patch_*_heightmap.png
+patch_*_preview.png
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp

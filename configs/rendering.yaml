@@ -1,0 +1,39 @@
+# Blender rendering configuration
+# -------------------------------------------------------
+
+# Render engine: CYCLES | EEVEE
+engine: CYCLES
+
+# Number of path-tracing samples (Cycles only).
+samples: 128
+
+# Output image resolution in pixels.
+resolution:
+  width: 1024
+  height: 1024
+
+# ---------------------------------------------------------------------------
+# Lighting — Mars-like single-sun setup
+# ---------------------------------------------------------------------------
+sun:
+  # Solar azimuth measured clockwise from North (scene +X axis), degrees.
+  azimuth_deg: 45.0
+  # Solar elevation above the horizon, degrees.
+  elevation_deg: 30.0
+  # Blender sun lamp strength (W/m², physically approximate).
+  strength: 5.0
+
+# Simple two-colour gradient sky — no atmospheric scattering yet.
+sky:
+  # RGB in linear sRGB [0, 1].
+  horizon_color: [0.35, 0.18, 0.08]   # ochre/rust
+  zenith_color:  [0.20, 0.12, 0.06]
+
+# ---------------------------------------------------------------------------
+# Output
+# ---------------------------------------------------------------------------
+# Colour space written to PNG / EXR outputs.
+output_color_space: sRGB
+
+# Bit depth for rendered images: 8 | 16
+bit_depth: 8

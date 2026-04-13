@@ -1,0 +1,49 @@
+# Sensor model configuration
+# -------------------------------------------------------
+# All distances in metres; angles in degrees.
+# Camera intrinsics follow the OpenCV convention (see CONVENTIONS.md).
+
+# ---------------------------------------------------------------------------
+# Aerial camera
+# NOTE: The aerial model (nadir_ortho vs perspective_uav) is an OPEN DECISION.
+#       These values are placeholders — do not treat as final.
+# ---------------------------------------------------------------------------
+aerial:
+  # Which camera model to activate.
+  # Options: nadir_ortho | perspective_uav
+  model: nadir_ortho   # OPEN DECISION
+
+  # --- Nadir orthophoto parameters (used when model: nadir_ortho) -----------
+  ortho:
+    # Ground sampling distance (metres/pixel)
+    gsd_m: 0.10
+    image_width_px: 1000
+    image_height_px: 1000
+
+  # --- Perspective UAV parameters (used when model: perspective_uav) --------
+  perspective:
+    altitude_m: 50.0
+    fov_horizontal_deg: 90.0
+    image_width_px: 1024
+    image_height_px: 1024
+    # Focal lengths in pixels; computed from fov if null.
+    fx_px: null
+    fy_px: null
+    # Principal point; null = image centre.
+    cx_px: null
+    cy_px: null
+
+# ---------------------------------------------------------------------------
+# Rover camera (stereo pair, forward-facing)
+# ---------------------------------------------------------------------------
+rover:
+  baseline_m: 0.30
+  image_width_px: 1280
+  image_height_px: 720
+  fov_horizontal_deg: 90.0
+  # Radial distortion coefficients (OpenCV k1, k2).
+  # Not modelled yet — kept at zero.
+  k1: 0.0
+  k2: 0.0
+  # Mount height above the terrain surface (metres)
+  mount_height_m: 1.5
