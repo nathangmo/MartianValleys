@@ -65,7 +65,9 @@ def analyse_terrain(terrain_obj):
     mat  = terrain_obj.matrix_world
     mat3 = mat.to_3x3()
 
-    mesh.calc_normals_split()
+    # calc_normals_split() was removed in Blender 4.1; normals are always current
+    if hasattr(mesh, "calc_normals_split"):
+        mesh.calc_normals_split()
 
     positions, normals, slopes = [], [], []
     up = Vector((0.0, 0.0, 1.0))
